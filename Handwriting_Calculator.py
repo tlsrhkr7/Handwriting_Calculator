@@ -9,7 +9,7 @@ from latex2sympy2 import latex2sympy, latex2latex
 
 class Handwriting_Calculater:
 
-    def convert_trig_functions(self, latex_expression):
+    def convert_to_calculate_functions(self, latex_expression):
         # Mathpix Api 식 LaTeX를 계산용 LaTex로 변환을 위한 함수
         trig_functions = {
             '\operatorname { sin }': '\sin',  
