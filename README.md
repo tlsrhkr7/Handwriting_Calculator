@@ -62,7 +62,6 @@ This project aims to make engineering calculations more intuitive by accepting â
 - **Mathpix API**
 - **SymPy**
 - **latex2sympy2**
-- GUI: (fill in your GUI framework, e.g., PyQt5 / Tkinter / etc.)
 
 ## Setup
 ### 1) Environment
@@ -74,7 +73,6 @@ This project aims to make engineering calculations more intuitive by accepting â
 Install required libraries:
 - `sympy`
 - `latex2sympy2`
-- (your GUI libs)
 - (http libs like `requests` if used for API calls)
 
 ### 3) Mathpix API Key
