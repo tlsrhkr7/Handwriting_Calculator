@@ -1,124 +1,136 @@
-# Handwriting_Calculator
+# ✍️ Handwriting Calculator
 
-A handwriting-based engineering calculator that converts handwritten math into LaTeX and evaluates it automatically.
-Users can write equations on a tablet canvas or upload a photo of handwritten formulas from paper.
+> **손글씨 기반 공학용 계산기** — 손으로 쓴 수식을 LaTeX로 변환하고 자동으로 계산해 주는 프로그램입니다. 태블릿 캔버스에 직접 수식을 쓰거나, 종이에 적은 수식을 사진으로 찍어 업로드할 수 있습니다.
 
-## Why this project?
-Engineering courses often require expressions that are unrealistic to compute mentally or by manual calculation.
-Since tablets are widely used for lectures, note-taking, and assignments, integrating a handwriting-to-math calculator into a familiar IT device can significantly reduce the time spent rewriting equations with buttons or keyboard-only input.
+---
 
-### Social value
-- Faster problem solving by writing formulas naturally (as you would on paper)
-- Works with both:
-  - Tablet handwriting input
-  - Photo upload (paper → camera → image)
+## 📌 프로젝트 개요
 
-### Technical / industrial value
-Traditional scientific calculators require strict input order and familiarity with many function keys.
-Handwriting is more natural for:
-- fractions, parentheses, roots, exponents
-- editing expressions without deleting everything (common in basic calculator UIs)
+공학 수업에서는 암산이나 수기 계산이 비현실적인 복잡한 수식을 다루는 경우가 많습니다. 강의·필기·과제에 태블릿이 널리 사용되는 만큼, 손글씨를 수식으로 변환하는 계산기를 익숙한 IT 기기에 통합하면 버튼이나 키보드 입력으로 수식을 다시 쓰는 시간을 크게 줄일 수 있습니다.
 
-This project aims to make engineering calculations more intuitive by accepting “human-style” math writing.
+기존 공학용 계산기는 엄격한 입력 순서와 수많은 함수 키에 대한 숙련을 요구합니다. 분수, 괄호, 루트, 지수 등은 손으로 쓰는 것이 훨씬 자연스럽고, 전체를 지우지 않고도 수식을 수정할 수 있습니다. 본 프로젝트는 '사람이 쓰는 방식'의 수식 입력을 받아들여 공학 계산을 보다 직관적으로 만드는 것을 목표로 합니다.
 
-## Project Goals
-### Core pipeline
-1. Extract text from a handwritten equation image using **Mathpix API**
-2. Convert the extracted result into **LaTeX**
-3. Parse LaTeX into a computable form using **latex2sympy2**
-4. Evaluate the expression using **SymPy** and return the result
+### 사회적 가치
+- 종이에 쓰듯 자연스럽게 수식을 작성하여 더 빠른 문제 해결
+- 태블릿 손글씨 입력과 사진 업로드(종이 → 카메라 → 이미지) 모두 지원
 
-> **Mathpix API**: OCR service specialized for math recognition  
-> **latex2sympy2**: Converts LaTeX into SymPy expressions  
-> **LaTeX**: Typesetting system widely used to represent mathematical expressions
+---
 
-### Qualitative goals
-- Build a user-friendly GUI
-- Keep the codebase maintainable and extensible
+## ✨ 주요 기능
 
-### Quantitative goals
-- Achieve **≥ 80% character recognition accuracy**
-- Support recognition & calculation for:
-  - calculus (derivatives/integrals), series, limits
-  - trigonometric functions
-  - square roots, exponents
-- Provide multiple input methods:
-  - image upload
-  - handwriting drawing canvas
-  - keyboard input
-- Display the converted LaTeX expression before evaluation
+| 기능 | 설명 |
+|------|------|
+| 손글씨 입력 | 캔버스에 직접 수식을 그려서 입력 |
+| 이미지 업로드 | 손으로 쓴 수식 사진을 업로드 |
+| LaTeX 미리보기 | 변환된 LaTeX 수식을 계산 전에 표시 |
+| 원클릭 계산 | 버튼 한 번으로 수식 평가 |
+| 예외 처리 | 사용자 친화적인 오류 메시지 제공 |
 
-## Features
-- Handwriting input (draw on canvas)
-- Image upload (photo of handwritten formulas)
-- LaTeX output preview
-- One-click evaluation
-- Error handling with user-friendly messages
-- Developed and tested on Ubuntu
+---
 
-## Tech Stack
-- **Python**
-- **Ubuntu**
-- **Mathpix API**
-- **SymPy**
-- **latex2sympy2**
+## 🏗️ 시스템 아키텍처
 
-## Setup
-### 1) Environment
-- Install **Ubuntu**
-- Install **VS Code**
-- Set up Python environment (recommended: virtual environment)
+```
+[손글씨 입력 / 이미지 업로드]
+            |
+            v
+  [Mathpix API] --- OCR로 수식 인식
+            |
+            v
+       [LaTeX 변환]
+            |
+            v
+  [latex2sympy2] --- LaTeX → SymPy 변환
+            |
+            v
+   [SymPy] --- 수식 평가 및 결과 반환
+```
 
-### 2) Dependencies
-Install required libraries:
-- `sympy`
-- `latex2sympy2`
-- (http libs like `requests` if used for API calls)
+### 핵심 파이프라인
+- **Mathpix API**: 수식 인식에 특화된 OCR 서비스로 손글씨 수식 이미지에서 텍스트 추출
+- **LaTeX 변환**: 추출 결과를 LaTeX 형식으로 변환
+- **latex2sympy2**: LaTeX를 SymPy 수식으로 파싱
+- **SymPy**: 수식을 평가하여 결과 반환
 
-### 3) Mathpix API Key
-Create a Mathpix account and issue an API key.
-Set it as an environment variable or configure it in a local config file (do not commit keys to GitHub).
+---
 
-Example (recommended):
-- `MATHPIX_APP_ID`
-- `MATHPIX_APP_KEY`
+## 🛠️ 기술 스택
 
-## Usage
-1. Choose one input method:
-   - Upload an image
-   - Write on the canvas
-   - Type using keyboard
-2. Submit the input
-3. Check the generated LaTeX expression
-4. Click **Calculate** to get the final result
+| 분류 | 기술 |
+|------|------|
+| 언어 | Python |
+| 개발 환경 | Ubuntu |
+| OCR | Mathpix API |
+| 수식 계산 | SymPy |
+| 수식 변환 | latex2sympy2 |
 
-## Problems Encountered & Fixes
-- **Mathpix output format mismatch**:
-  - Added a conversion function to translate Mathpix-style LaTeX into a format suitable for evaluation.
-- **Ubuntu disk space issue (boot failure)**:
-  - Entered recovery mode and removed unnecessary files to restore the system.
+---
 
-## Results / Achievements
-- Implemented an end-to-end pipeline:
-  - handwriting input → OCR → LaTeX → parsing → evaluation
-- Improved usability through a simple and intuitive UI
-- Integrated external API (Mathpix) and math libraries (SymPy ecosystem)
-- Added exception handling for stability
-- Built and tested in Ubuntu-based development environment
+## 🚀 사용 방법
 
-## Future Work
-- Add advanced features:
-  - matrices
-  - Laplace transforms
-- Improve keyboard input:
-  - provide math symbol buttons (sin/cos, integral, derivative, limit, etc.) instead of forcing LaTeX typing
-- Add more input options:
-  - camera capture
-  - screenshot / clipboard image paste
-  - direct import from drawing apps
-- Optimize recognition and evaluation speed
-- Refine UI based on user feedback
+### 1. 환경 설정
+- Ubuntu 설치
+- VS Code 설치
+- Python 환경 구성 (가상환경 권장)
 
-## Acknowledgements
-- Mathpix for OCR API
-- SymPy and latex2sympy2 communities
+### 2. 의존성 설치
+```bash
+pip install sympy latex2sympy2 requests
+```
+
+### 3. Mathpix API 키 설정
+Mathpix 계정을 생성하고 API 키를 발급받습니다. 환경 변수 또는 로컬 설정 파일에 설정하세요. (API 키는 절대 GitHub에 커밋하지 마세요)
+
+```
+MATHPIX_APP_ID
+MATHPIX_APP_KEY
+```
+
+### 4. 실행
+1. 입력 방식 선택 (이미지 업로드 / 캔버스 작성 / 키보드 입력)
+2. 입력 제출
+3. 생성된 LaTeX 수식 확인
+4. 계산 버튼 클릭 → 최종 결과 확인
+
+---
+
+## 🎯 목표 및 성과
+
+### 정량적 목표
+- 문자 인식 정확도 80% 이상 달성
+- 미적분(미분/적분), 급수, 극한, 삼각함수, 제곱근, 지수 인식 및 계산 지원
+- 다중 입력 방식(이미지 업로드, 손글씨 캔버스, 키보드 입력) 제공
+
+### 달성한 성과
+- 손글씨 입력 → OCR → LaTeX → 파싱 → 계산으로 이어지는 엔드투엔드 파이프라인 구현
+- 간단하고 직관적인 UI로 사용성 향상
+- 외부 API(Mathpix)와 수학 라이브러리(SymPy 생태계) 통합
+- 안정성을 위한 예외 처리 추가
+- Ubuntu 기반 개발 환경에서 빌드 및 테스트 완료
+
+---
+
+## ⚠️ 문제점 및 향후 계획
+
+### 발생한 문제 및 해결
+- **Mathpix 출력 형식 불일치**: Mathpix 스타일 LaTeX를 계산에 적합한 형식으로 변환하는 함수 추가
+- **Ubuntu 디스크 공간 부족(부팅 실패)**: 복구 모드 진입 후 불필요한 파일 제거로 시스템 복원
+
+### 향후 계획
+- **고급 기능 추가**: 행렬, 라플라스 변환 지원
+- **키보드 입력 개선**: LaTeX 직접 입력 대신 수학 기호 버튼(sin/cos, 적분, 미분, 극한 등) 제공
+- **입력 방식 확장**: 카메라 촬영, 스크린샷/클립보드 이미지 붙여넣기, 그림판 앱 직접 가져오기
+- 인식 및 계산 속도 최적화
+- 사용자 피드백 기반 UI 개선
+
+---
+
+## 🙏 감사의 말
+- OCR API를 제공한 **Mathpix**
+- **SymPy** 및 **latex2sympy2** 커뮤니티
+
+---
+
+## 👤 개발자
+
+- **tlsrhkr7** (Dongjun Shin) — 오픈소스SW이해와실습
